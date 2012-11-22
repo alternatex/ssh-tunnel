@@ -4,7 +4,7 @@
 cd ~
 
 # fetch sources
-git clone https://github.com/alternatex/tunnelx.git && cd tunnelx
+git clone https://github.com/alternatex/tunnelx.git
 
 # update shell configuration
 if [ -f ~/.zshrc ]; then 
