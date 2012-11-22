@@ -17,7 +17,14 @@ via `wget`
 
 wget --no-check-certificate https://github.com/alternatex/tunnelx/raw/master/install.sh -O - | sh
 
-Future releases might include features like:
+Usage
+-------------
+
+```bash
+tunnelx
+```
+
+Roadmap
 -------------
 - proper logs
 - auto-update
@@ -25,13 +32,6 @@ Future releases might include features like:
 - multiple connection support 
 - persisted settings
 - profiles 
-
-Usage
--------------
-
-```bash
-tunnelx
-```
 
 License
 -------------
