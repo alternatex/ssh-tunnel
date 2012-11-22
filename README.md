@@ -14,7 +14,7 @@ via `curl`
 
 via `wget`
 
-`wget --no-check-certificate https://github.com/alternatex/tunnelx/raw/master/install.sh -O - | sh
+`wget --no-check-certificate https://github.com/alternatex/tunnelx/raw/master/install.sh -O - | sh`
 
 Usage
 -------------
