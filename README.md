@@ -1,51 +1,36 @@
 Tunnelx
 =============
 
-SSH-tunnel abstraction utility
+SSH-Tunnel management utility
 
-Prerequisites
+Setup
 -------------
-**OS:** 
+The automatic installer:
 
-Unix
+You can install this via the command line with either `curl` or `wget`.
 
-**SW:**
+via `curl`
 
-[https://github.com/alternatex/bazinga](https://github.com/alternatex/bazinga)
+curl -L https://github.com/alternatex/tunnelx/raw/master/install.sh | sh
 
-Installation 
+via `wget`
+
+wget --no-check-certificate https://github.com/alternatex/tunnelx/raw/master/install.sh -O - | sh
+
+Future releases might include features like:
 -------------
-
-**Fetch sources** [https://github.com/alternatex/tunnelx/archive/master.zip](https://github.com/alternatex/tunnelx/archive/master.zip)
-
-**Extract to** /usr/bin/tunnelx
-
-**Update environment variables**
-
-```bash
-TUNNELXPATH=$(cat <<'TUNNELXPATH'    
-
-# Tunnelx
-export PATH=/usr/bin/tunnelx/bin:$PATH
-
-TUNNELXPATH
-)
-echo "$TUNNELXPATH" >> ~/.zshrc
-```
-
-Future releases might include
--------------
-- Proper Logs
-- Auto-Reconnect
-- Handle Multiple Connections
-- Profiles  
-- Persist Settings
+- proper logs
+- auto-update
+- auto-reconnect watch-dog
+- multiple connection support 
+- persisted settings
+- profiles 
 
 Usage
 -------------
 
 ```bash
-tunnelxjr
+tunnelx
 ```
 
 License

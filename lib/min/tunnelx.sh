@@ -9,9 +9,9 @@ function text {
 
 printf "\e[1;31m"
 echo "
-------------------
- ★  TUNNELX-JR ★
-------------------"
+---------------------
+--- ★  TUNNELX ★  ---
+---------------------"
 printf "\e[0m"
 
 text "listen on:"
