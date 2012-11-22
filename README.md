@@ -11,11 +11,11 @@ You can install this via the command line with either `curl` or `wget`.
 
 via `curl`
 
-curl -L https://github.com/alternatex/tunnelx/raw/master/install.sh | sh
+`curl -L https://github.com/alternatex/tunnelx/raw/master/install.sh | sh`
 
 via `wget`
 
-wget --no-check-certificate https://github.com/alternatex/tunnelx/raw/master/install.sh -O - | sh
+`wget --no-check-certificate https://github.com/alternatex/tunnelx/raw/master/install.sh -O - | sh`
 
 Usage
 -------------
