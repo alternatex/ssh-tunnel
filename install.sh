@@ -10,14 +10,17 @@ git clone https://github.com/alternatex/tunnelx.git .tunnelx
 if [ -f ~/.zshrc ]; then 
 	echo "# tunnelx" >> ~/.zshrc
 	echo "export PATH=~/.tunnelx/bin:$PATH" >> ~/.zshrc
+	. ~/.zshrc
 fi
 
 if [ -f ~/.bashrc ]; then 
 	echo "# tunnelx" >> ~/.bashrc
 	echo "export PATH=~/.tunnelx/bin:$PATH" >> ~/.bashrc
+	. ~/.bashrc
 fi
 
 if [ -f ~/.profile ]; then 
 	echo "# tunnelx" >> ~/.profile
 	echo "export PATH=~/.tunnelx/bin:$PATH" >> ~/.profile
+	. ~/.profile
 fi
