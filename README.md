@@ -3,7 +3,7 @@ Tunnelx
 
 SSH-Tunnel management utility
 
-Setup
+Installation
 -------------
 
 You can install this via the command line with either `curl` or `wget`.
