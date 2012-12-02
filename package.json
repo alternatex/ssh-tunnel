@@ -1,7 +1,7 @@
 {
   "name": "tunnelx",
   "description": "SSH-Tunnel management utility",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "http://github.com/alternatex/tunnelx",
   "author": {
     "name": "Gianni Furger",

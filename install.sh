@@ -6,21 +6,27 @@ cd ~
 # fetch sources
 git clone https://github.com/alternatex/tunnelx.git .tunnelx
 
-# update shell configuration
+# shell configuration file (TODO: combine with $SHELL environment variable)
+shellcfg="~/.tunnelxrc"
+
+# ZSH
 if [ -f ~/.zshrc ]; then 
-	echo "# tunnelx" >> ~/.zshrc
-	echo "export PATH=~/.tunnelx/bin:$PATH" >> ~/.zshrc
-	. ~/.zshrc
+	shellcfg="~/.zshrc"
 fi
 
+# BASH
 if [ -f ~/.bashrc ]; then 
-	echo "# tunnelx" >> ~/.bashrc
-	echo "export PATH=~/.tunnelx/bin:$PATH" >> ~/.bashrc
-	. ~/.bashrc
+	shellcfg="~/.bashrc"
 fi
 
+# ?
 if [ -f ~/.profile ]; then 
-	echo "# tunnelx" >> ~/.profile
-	echo "export PATH=~/.tunnelx/bin:$PATH" >> ~/.profile
-	. ~/.profile
+	shellcfg="~/.profile"
 fi
+
+# update shell configuration
+echo "# tunnelx" >> $shellcfg
+echo "export PATH=~/.tunnelx/bin:$PATH" >> $shellcfg
+
+# apply 
+. $shellcfg

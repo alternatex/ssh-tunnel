@@ -3,6 +3,10 @@ Tunnelx
 
 SSH-Tunnel management utility
 
+Prerequisites
+-------------
+* Bazinga (https://github.com/alternatex/bazinga)
+
 Installation
 -------------
 
@@ -23,13 +27,17 @@ Usage
 tunnelx
 ```
 
+Changelog
+-------------
+**1.0.1:**<br/>
+* settings persisted by `bazinga` inclusion for configuration management
+
 Roadmap
 -------------
 - proper logs
 - auto-update
 - auto-reconnect watch-dog
 - multiple connection support 
-- persisted settings
 - profiles 
 
 License
