@@ -7,26 +7,26 @@ cd ~
 git clone https://github.com/alternatex/tunnelx.git .tunnelx
 
 # shell configuration file (TODO: combine with $SHELL environment variable)
-shellcfg="~/.tunnelxrc"
-
-# ZSH
-if [ -f ~/.zshrc ]; then 
-	shellcfg="~/.zshrc"
-fi
+shellcfg="$HOME/.tunnelxrc"
 
 # BASH
 if [ -f ~/.bashrc ]; then 
-	shellcfg="~/.bashrc"
+	shellcfg="$HOME/.bashrc"
+fi
+
+# ZSH
+if [ -f ~/.zshrc ]; then 
+	shellcfg="$HOME/.zshrc"
 fi
 
 # ?
 if [ -f ~/.profile ]; then 
-	shellcfg="~/.profile"
+	shellcfg="$HOME/.profile"
 fi
 
 # update shell configuration
 echo "# tunnelx" >> $shellcfg
-echo "export PATH=~/.tunnelx/bin:$PATH" >> $shellcfg
+echo "export PATH=~/.tunnelx/bin:$PATH" >> ${shellcfg}
 
 # apply 
 . $shellcfg
