@@ -26,7 +26,7 @@ fi
 
 # update shell configuration
 echo "# tunnelx" >> $shellcfg
-echo "export PATH=~/.tunnelx/bin:$PATH" >> ${shellcfg}
+echo "export PATH=~/.tunnelx/bin:$PATH" >> $shellcfg
 
 # apply 
 . $shellcfg
