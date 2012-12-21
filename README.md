@@ -29,7 +29,7 @@ tunnelx
 
 Changelog
 -------------
-**1.0.1:**<br/>
+**1.1.0:**<br/>
 * settings persisted by `bazinga` inclusion for configuration management
 
 Roadmap
