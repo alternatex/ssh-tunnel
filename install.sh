@@ -3,30 +3,17 @@
 # go home
 cd ~
 
-# fetch sources
-git clone https://github.com/alternatex/tunnelx.git .tunnelx
+# do info
+echo "checking dependency: bazinga...."
 
-# shell configuration file (TODO: combine with $SHELL environment variable)
-shellcfg="$HOME/.tunnelxrc"
+# do check 
+if command -v "bazinga" &>/dev/null
+then
 
-# BASH
-if [ -f ~/.bashrc ]; then 
-	shellcfg="$HOME/.bashrc"
+	# shout out lod
+	echo "bazinga found. good."
+else
+
+	# install dependency
+	shinst install "alternatex/bazinga"
 fi
-
-# ZSH
-if [ -f ~/.zshrc ]; then 
-	shellcfg="$HOME/.zshrc"
-fi
-
-# ?
-if [ -f ~/.profile ]; then 
-	shellcfg="$HOME/.profile"
-fi
-
-# update shell configuration
-echo "# tunnelx" >> $shellcfg
-echo "export PATH=~/.tunnelx/bin:$PATH" >> $shellcfg
-
-# apply 
-. $shellcfg
