@@ -10,13 +10,15 @@ Prerequisites
 Installation
 -------------
 
-You can install this via the command line with either `curl` or `wget`.
+You can install this through [shinst](https://github.com/alternatex/shinst):
 
-via `curl`
+`shinst install alternatex/tunnelx -n tunnelx
+
+`curl`:
 
 `curl -L https://github.com/alternatex/tunnelx/raw/master/install.sh | sh`
 
-via `wget`
+or `wget`:
 
 `wget --no-check-certificate https://github.com/alternatex/tunnelx/raw/master/install.sh -O - | sh`
 
