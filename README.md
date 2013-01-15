@@ -12,7 +12,7 @@ Installation
 
 You can install this through [shinst](https://github.com/alternatex/shinst):
 
-`shinst install alternatex/tunnelx -n tunnelx`
+`shinst install alternatex/tunnelx`
 
 Usage
 -------------

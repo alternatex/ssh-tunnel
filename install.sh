@@ -4,16 +4,18 @@
 cd ~
 
 # do info
-echo "checking dependency: bazinga...."
+printf "\e[32mchecking dependency: bazinga....\e[0m   $1\n"
 
 # do check 
 if command -v "bazinga" &>/dev/null
 then
 
 	# shout out lod
-	echo "bazinga found. good."
+	printf "\e[32mbazinga found.\e[0m   $1\n"
 else
 
 	# install dependency
 	shinst install "alternatex/bazinga" -n "bazinga"
 fi
+
+printf "\e[32mtunnelx is installed.\e[0m   $1\n"

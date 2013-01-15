@@ -41,6 +41,7 @@ printf "\e[0m"
 # include configuration (if any)
   read -p "Configure? («Y» to edit or any key to skip)"
         ([ "$REPLY" == "y" ] || [ "$REPLY" == "Y" ])  && bazinga_edit
+        
 source ../.bazinga/configure.sh
 
 # move back to directory where we started at (TODO: properly solve path issues)
