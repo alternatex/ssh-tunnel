@@ -5,7 +5,7 @@ SSH-Tunnel management utility
 
 Prerequisites
 -------------
-* Bazinga (https://github.com/alternatex/bazinga)
+Unix-OS
 
 Installation
 -------------
@@ -13,14 +13,6 @@ Installation
 You can install this through [shinst](https://github.com/alternatex/shinst):
 
 `shinst install alternatex/tunnelx -n tunnelx`
-
-curl:
-
-`curl -L https://github.com/alternatex/tunnelx/raw/master/install.sh | sh`
-
-wget:
-
-`wget --no-check-certificate https://github.com/alternatex/tunnelx/raw/master/install.sh -O - | sh`
 
 Usage
 -------------
