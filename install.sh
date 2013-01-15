@@ -15,5 +15,5 @@ then
 else
 
 	# install dependency
-	shinst install "alternatex/bazinga"
+	shinst install "alternatex/bazinga" -n "bazinga"
 fi
