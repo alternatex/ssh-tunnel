@@ -38,10 +38,7 @@ echo "
 -------------------------------"
 printf "\e[0m"
 
-# include configuration (if any)
-  read -p "Configure? («Y» to edit or any key to skip)"
-        ([ "$REPLY" == "y" ] || [ "$REPLY" == "Y" ])  && bazinga_edit
-        
+# include configuration (if any)       
 source ../.bazinga/configure.sh
 
 # move back to directory where we started at (TODO: properly solve path issues)
@@ -61,6 +58,8 @@ fi
 # edit configuration?
 if [ -f ".tunnelxc/settings.sh" ]; then 
   echo ""
+  read -p "Configure? («Y» to edit or any key to skip)"
+        ([ "$REPLY" == "y" ] || [ "$REPLY" == "Y" ])  && bazinga_edit  
 else 
   bazinga_edit  
 fi
