@@ -61,6 +61,7 @@ if [ -f ".tunnelxc/settings.sh" ]; then
   read -p "Configure? («Y» to edit or any key to skip)"
         ([ "$REPLY" == "y" ] || [ "$REPLY" == "Y" ])  && bazinga_edit  
 else 
+  # initial configuration
   bazinga_edit  
 fi
 

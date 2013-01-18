@@ -15,7 +15,7 @@ then
 else
 
 	# install dependency
-	shinst install "alternatex/bazinga" -n "bazinga"
+	shinst install "alternatex/bazinga"
 fi
 
 printf "\e[32mtunnelx is installed.\e[0m   $1\n"
