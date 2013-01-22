@@ -5,7 +5,8 @@ SSH-Tunnel management utility
 
 Prerequisites
 -------------
-Unix-OS
+
+Unix OS
 
 Installation
 -------------

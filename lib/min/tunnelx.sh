@@ -38,8 +38,13 @@ echo "
 -------------------------------"
 printf "\e[0m"
 
-# include configuration (if any)       
-source ../.bazinga/configure.sh
+# preset avail?
+if [[ -a "../.bazinga/configure.sh" ]]
+  then 
+  
+  # include configuration
+  source ../.bazinga/configure.sh
+fi
 
 # move back to directory where we started at (TODO: properly solve path issues)
 cd $currentpath
