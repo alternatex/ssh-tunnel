@@ -15,6 +15,10 @@ You can install this through [shinst](https://github.com/alternatex/shinst):
 
 `shinst install alternatex/tunnelx`
 
+or
+
+`wget https://raw.github.com/alternatex/shinst/develop/src/tools/install.sh -O install.sh && bash install.sh stable alternatex/tunnelx`
+
 Usage
 -------------
 
