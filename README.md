@@ -1,4 +1,4 @@
-Tunnelx
+Tunnel
 =============
 
 SSH-Tunnel management utility
