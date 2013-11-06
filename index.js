@@ -14,6 +14,8 @@ var exec = child_process.exec;
 var fs = require('fs');
 var exists = fs.existsSync;
 
+// TODO: add annotations to create the whole menu, actions and the reference between object, properties, flatten -> properties: remoteHostname, remotePort, localHostname, ....
+
 /**
  * Expose the root command.
  */
@@ -74,6 +76,52 @@ Tunnel.prototype.tunnel = function(name, desc){
   };
 };
 
+/**
+ * Context `Local`
+ *
+ * @cli:type {Inquirer.prompt.type} "input"
+ * @cli:message {String} "Enter local hostname"
+ * @cli:name {String} "local.hostname",
+ * @cli:default {String} connection.local.hostname
+*/
+Tunnel.prototype.local = {
+  hostname: 'hostname',
+  port: 8080
+};
+
+/**
+ * Context `Remote`
+ *
+ * @cli:type {Inquirer.prompt.type} "input"
+ * @cli:message {String} "Enter local hostname"
+ * @cli:name {String} "local.hostname",
+ * @cli:default {String} connection.local.hostname
+*/
+Tunnel.prototype.remote = {
+  network: 'hostname',
+  hostname: 'hostname',
+  port: 8080,
+  username: ''
+};
+
+/**
+ * Add command `name`.
+ *
+ * @cli:type {Inquirer.prompt.type} "input"
+ * @cli:message {String} "Enter local hostname"
+ * @cli:name {String} "local.hostname",
+ * @cli:default {String} connection.local.hostname
+*/
+Tunnel.prototype.localPort = '';
+
+/**
+ * Add command `name`.
+ *
+ * @param {String} name
+ * @param {String} [desc]
+ * @return {Tunnel} the new command
+ * @api public
+ */      
 Tunnel.prototype.connect = function(localHostname, localPort, remoteNetwork, remoteHostname, remotePort, remoteUser){
   
   var sshConnect = 'ssh -N -L '+localPort+':'+remoteHostname+':'+remotePort+' '+remoteUser+'@'+remoteNetwork;  

@@ -4,18 +4,21 @@
 
 var version = '2.1.0';
 
+// module dependencies
 var _ = require("underscore");
 var colors = require("colors");
 var inquirer = require("inquirer");
 var fs = require("fs");
 var tunnel = require("../").tunnel('');
 
-var config = {};
-var configFilename = 'tunnel.conf';
-
+// say hi
 console.log('Tunnel'.white.bold); 
 console.log(('Version: '+version).white); 
 console.log();
+
+// bootstrap
+var config = {};
+var configFilename = 'tunnel.conf';
 
 try {
   config = JSON.parse(fs.readFileSync(configFilename, 'utf8'));
@@ -25,11 +28,17 @@ try {
     "Development": defaultConnection(),  
     "Staging": defaultConnection(),  
     "Production": defaultConnection()
-  }, null, 4), 'utf8');
+  }, null, 2), 'utf8');
 }
 
 var actions = {
   'new': 'New connection'
+};
+
+var connactions = {
+  'copy': 'Copy',
+  'remove': 'Remove',
+  'update': 'Update'
 };
 
 var choices = [];
@@ -53,19 +62,33 @@ inquirer.prompt([
     promptConnection(answers.connection);
   }
   //console.log( JSON.stringify(answers, null, "  ") );
-  //tunnel.emit('disconnect');
+  //tunnel.emit('selected');
 }); 
 
 tunnel.on('connect', function(){
   console.log("Establishing connection".green);
 });
 
-/*
-tunnel.on('test', function(){console.log('....', arguments);});
-tunnel.emit('test', 1);
-tunnel.emit('test', 2);
-tunnel.emit('test', 3);
-*/
+// defaults
+function defaultConnection(){
+  return { 
+    "local": {
+      "hostname": "localhost",
+      "port": 80
+    },
+    "remote": {
+      "network": "host.tld",
+      "hostname": "localhost",
+      "port": 80,
+      "username": "user"
+    }
+  };
+}
+
+// new
+function newConnection(id){
+
+};
 
 // list
 function showConnections(){
@@ -82,40 +105,17 @@ function deleteConnection(id){
 
 };
 
-// new
-function newConnection(id){
-
-};
-
-// defaults
-function defaultConnection(){
-  return { 
-    "connection": {
-      "name": "new"
-    },
-    "local": {
-      "hostname": "localhost",
-      "port": 80
-    },
-    "remote": {
-      "network": "host.tld",
-      "hostname": "localhost",
-      "port": 80,
-      "username": "user"
-    }
-  };
-}
-
 // store?
 function promptStore(id){
-  inquirer.prompt([
-    {
+  inquirer.prompt([{
       type: "confirm",
       message: "Do you want to bookmark this connection?",
       name: "bookmark",
       default: true
     }], function(answers){
-      //config[]=answers;
+      if(answers.bookmark){
+        fs.writeFileSync(configFilename, JSON.stringify(config, null, 2), 'utf8');    
+      }
       console.log(answers);
       promptConnect(id);
     });  
@@ -143,12 +143,12 @@ function promptConnection(id){
   var connection = (typeof(id)=='undefined' || typeof(config[id])!='object') ? defaultConnection() : config[id];
 
   inquirer.prompt([
-    /*{
+    {
       type: "input",
       message: "Enter connection name",
-      name: "connection.name",
-      default: connection.connection.name
-    },*/
+      name: "name",
+      default: id
+    },
     {
       type: "input",
       message: "Enter local hostname",
@@ -181,16 +181,38 @@ function promptConnection(id){
     },
     {
       type: "input",
-      message: "Enter remote user",
-      name: "remote.user",
-      default: connection.remote.user
+      message: "Enter remote username",
+      name: "remote.username",
+      default: connection.remote.username
     }
 
   ], function( answers ) {
-    console.log(answers);
-    config[answers['connection.name']]=answers;
-    fs.writeFileSync(configFilename, JSON.stringify(config, null, 4), 'utf8');    
-    promptStore(id);
-    tunnel.emit('disconnect');
+    console.log(answers);    
+    
+    var name = answers['name'];
+    delete answers['name'];
+
+    var data = {};
+    _(answers).each(function(answer, index){
+      var segments = index.split('.');
+      if(typeof(data[segments[0]])=='undefined'){
+        data[segments[0]] = {};
+      }
+      data[segments[0]][segments[1]] = answer;
+    });
+
+    console.log("data", data);
+
+    // attach
+    config[name]=data;
+
+    // if connection got renamed, delete the old entry
+    if(name!=id) delete config[id];      
+
+    // prompt user
+    promptStore(name);
+
+    // emit event?
+    tunnel.emit('event');
   });
 }
