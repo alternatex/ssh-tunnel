@@ -1,0 +1,196 @@
+#!/usr/bin/env node
+
+"use strict";
+
+var version = '2.1.0';
+
+var _ = require("underscore");
+var colors = require("colors");
+var inquirer = require("inquirer");
+var fs = require("fs");
+var tunnel = require("../").tunnel('');
+
+var config = {};
+var configFilename = 'tunnel.conf';
+
+console.log('Tunnel'.white.bold); 
+console.log(('Version: '+version).white); 
+console.log();
+
+try {
+  config = JSON.parse(fs.readFileSync(configFilename, 'utf8'));
+} catch(ex){
+  console.log(ex);
+  fs.writeFileSync(configFilename, JSON.stringify({
+    "Development": defaultConnection(),  
+    "Staging": defaultConnection(),  
+    "Production": defaultConnection()
+  }, null, 4), 'utf8');
+}
+
+var actions = {
+  'new': 'New connection'
+};
+
+var choices = [];
+choices.push(actions['new']);
+choices.push(new inquirer.Separator());
+choices = choices.concat(_.keys(config));
+
+// ...
+inquirer.prompt([
+  {
+    type      : "list",
+    name      : "connection",
+    message   : "Select Connection".yellow,
+    paginated : true,
+    choices   : choices
+  }], function( answers ) {
+
+  if(answers.connection==actions['new']){
+    promptConnection();
+  } else {
+    promptConnection(answers.connection);
+  }
+  //console.log( JSON.stringify(answers, null, "  ") );
+  //tunnel.emit('disconnect');
+}); 
+
+tunnel.on('connect', function(){
+  console.log("Establishing connection".green);
+});
+
+/*
+tunnel.on('test', function(){console.log('....', arguments);});
+tunnel.emit('test', 1);
+tunnel.emit('test', 2);
+tunnel.emit('test', 3);
+*/
+
+// list
+function showConnections(){
+
+};
+
+// show
+function showConnection(id){
+
+};
+
+// delete
+function deleteConnection(id){
+
+};
+
+// new
+function newConnection(id){
+
+};
+
+// defaults
+function defaultConnection(){
+  return { 
+    "connection": {
+      "name": "new"
+    },
+    "local": {
+      "hostname": "localhost",
+      "port": 80
+    },
+    "remote": {
+      "network": "host.tld",
+      "hostname": "localhost",
+      "port": 80,
+      "username": "user"
+    }
+  };
+}
+
+// store?
+function promptStore(id){
+  inquirer.prompt([
+    {
+      type: "confirm",
+      message: "Do you want to bookmark this connection?",
+      name: "bookmark",
+      default: true
+    }], function(answers){
+      //config[]=answers;
+      console.log(answers);
+      promptConnect(id);
+    });  
+}
+
+// connect?
+function promptConnect(id){
+  inquirer.prompt([
+    {
+      type: "confirm",
+      message: "Do you want to connect?",
+      name: "connect",
+      default: true
+    }], function(answers){
+      console.log(answers);
+      if(answers.connect) {
+        tunnel.connect('localhost', 8080, 'somehost.com', '127.0.0.1', 4502, 'someuser');
+      }      
+    });  
+}
+
+// edit/new
+function promptConnection(id){
+  
+  var connection = (typeof(id)=='undefined' || typeof(config[id])!='object') ? defaultConnection() : config[id];
+
+  inquirer.prompt([
+    /*{
+      type: "input",
+      message: "Enter connection name",
+      name: "connection.name",
+      default: connection.connection.name
+    },*/
+    {
+      type: "input",
+      message: "Enter local hostname",
+      name: "local.hostname",
+      default: connection.local.hostname
+    },
+    {
+      type: "input",
+      message: "Enter local port",
+      name: "local.port",
+      default: connection.local.port
+    },
+    {
+      type: "input",
+      message: "Enter remote network",
+      name: "remote.network",
+      default: connection.remote.network
+    },
+    {
+      type: "input",
+      message: "Enter remote hostname",
+      name: "remote.hostname",
+      default: connection.remote.hostname
+    },
+    {
+      type: "input",
+      message: "Enter remote port",
+      name: "remote.port",
+      default: connection.remote.port
+    },
+    {
+      type: "input",
+      message: "Enter remote user",
+      name: "remote.user",
+      default: connection.remote.user
+    }
+
+  ], function( answers ) {
+    console.log(answers);
+    config[answers['connection.name']]=answers;
+    fs.writeFileSync(configFilename, JSON.stringify(config, null, 4), 'utf8');    
+    promptStore(id);
+    tunnel.emit('disconnect');
+  });
+}

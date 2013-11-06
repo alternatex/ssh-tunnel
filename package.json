@@ -1,27 +1,46 @@
 {
-  "name": "tunnel",
+  "name": "ssh-tunnel",
   "description": "SSH-Tunnel management utility",
-  "version": "2.0.0",
-  "homepage": "http://github.com/alternatex/tunnelx",
+  "version": "2.1.0",
+  "keywords": [
+    "command",
+    "cli",
+    "ssh",
+    "tunnel",
+    "shell"
+  ],
   "author": {
     "name": "Gianni Furger",
     "email": "gianni.furger@gmail.com",
     "url": "http://github.com/alternatex/"
   },
-  "licenses": [
-    {
-      "type": "BSD",
-      "url": "https://github.com/alternatex/tunnel/blob/master/LICENSE"
-    },
-    {
-      "type": "MIT",
-      "url": "https://github.com/alternatex/tunnel/blob/master/LICENSE"
-    }
-  ],
-  "amd": {},
-  "engines": {},
-  "dependencies": {
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alternatex/tunnel.git"
+  },
+  "dependencies": {    
     "colors": "~0.6",
     "inquirer": "~0.3"
-  }
+  },  
+  "devDependencies": {
+    "commander": "~2.0",
+    "prompt": "~0.2",    
+    "underscore": "~1.5",    
+    "should": ">= 0.0.1"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "main": "index",
+  "engines": {
+    "node": ">= 0.6.x"
+  },
+  "readme": "",
+  "readmeFilename": "README.md",
+  "_id": "ssh-tunnel@2.0.0",
+  "dist": {
+    "shasum": "d1b86f901f8b64bd941bdeadaf924530393be928"
+  },
+  "_from": "tunnel@~2.0",
+  "_resolved": "https://registry.npmjs.org/ssh-tunnel/-/ssh-tunnel-2.0.0.tgz"
 }

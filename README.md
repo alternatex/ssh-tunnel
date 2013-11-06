@@ -47,4 +47,4 @@ License
 Released under two licenses: new BSD, and MIT. You may pick the
 license that best suits your development needs.
 
-https://github.com/alternatex/tunnelx/blob/master/LICENSE
+https://github.com/alternatex/tunnel/blob/master/LICENSE
