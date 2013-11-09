@@ -1,5 +1,7 @@
-Tunnel
+SSH-Tunnel
 =============
+
+[![Build Status](https://secure.travis-ci.org/alternatex/ssh-tunnel.png?branch=master)](http://travis-ci.org/alternatex/ssh-tunnel)
 
 SSH-Tunnel management utility
 
@@ -11,19 +13,16 @@ Unix OS
 Installation
 -------------
 
-You can install this through [shinst](https://github.com/alternatex/shinst):
+You can install this through [npm](https://npmjs.org):
 
-`shinst install alternatex/tunnelx`
+`npm install ssh-tunnel`
 
-or
-
-`wget https://raw.github.com/alternatex/shinst/develop/src/tools/install.sh -O install.sh && bash install.sh stable alternatex/tunnelx`
 
 Usage
 -------------
 
 ```bash
-tunnelx
+ssh-tunnel
 ```
 
 Changelog
@@ -34,17 +33,12 @@ Changelog
 **1.2.0:**<br/>
 * installation through `shinst` 
 
-Roadmap
--------------
-- proper logs
-- auto-update
-- auto-reconnect watch-dog
-- multiple connection support 
-- profiles 
+**2.0.0:**<br/>
+* switched from bash to nodejs
 
 License
 -------------
 Released under two licenses: new BSD, and MIT. You may pick the
 license that best suits your development needs.
 
-https://github.com/alternatex/tunnel/blob/master/LICENSE
+https://github.com/alternatex/ssh-tunnel/blob/master/LICENSE
