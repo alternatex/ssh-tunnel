@@ -20,12 +20,12 @@
   },
   "dependencies": {    
     "colors": "~0.6",
-    "inquirer": "~0.3"
-  },  
-  "devDependencies": {
+    "inquirer": "~0.3",
     "commander": "~2.0",
     "prompt": "~0.2",    
-    "underscore": "~1.5",    
+    "underscore": "~1.5"        
+  },  
+  "devDependencies": {
     "should": ">= 0.0.1"
   },
   "scripts": {

@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// TODOS: second navigation level connection (show, edit, remove, connect...), proper error handling, tests, ...
+
 "use strict";
 
 var version = '2.1.0';
@@ -9,6 +11,9 @@ var _ = require("underscore");
 var colors = require("colors");
 var inquirer = require("inquirer");
 var fs = require("fs");
+var child_process = require('child_process');
+var spawn = child_process.spawn;
+var exec = child_process.exec;
 var tunnel = require("../").tunnel('');
 
 // say hi
@@ -23,7 +28,7 @@ var configFilename = 'tunnel.conf';
 try {
   config = JSON.parse(fs.readFileSync(configFilename, 'utf8'));
 } catch(ex){
-  console.log(ex);
+  false && console.log(ex);
   fs.writeFileSync(configFilename, JSON.stringify({
     "Development": defaultConnection(),  
     "Staging": defaultConnection(),  
@@ -31,48 +36,28 @@ try {
   }, null, 2), 'utf8');
 }
 
-var actions = {
-  'new': 'New connection'
-};
-
-var connactions = {
-  'copy': 'Copy',
-  'remove': 'Remove',
-  'update': 'Update'
-};
-
-var choices = [];
-choices.push(actions['new']);
-choices.push(new inquirer.Separator());
-choices = choices.concat(_.keys(config));
-
-// ...
-inquirer.prompt([
-  {
-    type      : "list",
-    name      : "connection",
-    message   : "Select Connection".yellow,
-    paginated : true,
-    choices   : choices
-  }], function( answers ) {
-
-  if(answers.connection==actions['new']){
-    promptConnection();
-  } else {
-    promptConnection(answers.connection);
-  }
-  //console.log( JSON.stringify(answers, null, "  ") );
-  //tunnel.emit('selected');
-}); 
-
 tunnel.on('connect', function(){
   console.log("Establishing connection".green);
+  console.log("Press "+"Ctrl+C".yellow + " to disconnect");
 });
+
+var actions = {
+  'connect': 'Connect',  
+  'update': 'Update',
+  'copy': 'Copy',
+  'delete': 'Delete',
+  'new': 'New connection' 
+};
+
+function getActions(){
+  return actions;
+}
 
 // defaults
 function defaultConnection(){
   return { 
     "local": {
+      "protocol": "http",
       "hostname": "localhost",
       "port": 80
     },
@@ -85,25 +70,9 @@ function defaultConnection(){
   };
 }
 
-// new
-function newConnection(id){
-
-};
-
-// list
-function showConnections(){
-
-};
-
-// show
-function showConnection(id){
-
-};
-
-// delete
-function deleteConnection(id){
-
-};
+function updateConfig(){
+  fs.writeFileSync(configFilename, JSON.stringify(config, null, 2), 'utf8');
+}
 
 // store?
 function promptStore(id){
@@ -114,15 +83,32 @@ function promptStore(id){
       default: true
     }], function(answers){
       if(answers.bookmark){
-        fs.writeFileSync(configFilename, JSON.stringify(config, null, 2), 'utf8');    
+        updateConfig();
       }
-      console.log(answers);
       promptConnect(id);
+    });  
+}
+
+// store?
+function promptDelete(id){
+  inquirer.prompt([{
+      type: "confirm",
+      message: "Do you really want to delete this connection?",
+      name: "delete",
+      default: true
+    }], function(answers){
+      if(answers['delete']){
+        delete config[id];
+        updateConfig();
+        console.log('Connection '.green + id + ' deleted'.green);
+        promptConnectionSelect();
+      }
     });  
 }
 
 // connect?
 function promptConnect(id){
+  var connection = config[id];
   inquirer.prompt([
     {
       type: "confirm",
@@ -130,15 +116,106 @@ function promptConnect(id){
       name: "connect",
       default: true
     }], function(answers){
-      console.log(answers);
-      if(answers.connect) {
-        tunnel.connect('localhost', 8080, 'somehost.com', '127.0.0.1', 4502, 'someuser');
-      }      
+      if(answers.connect){
+        config.lastUsedConnection = id;
+        updateConfig();
+        tunnel.connect(connection.local.hostname, connection.local.port, connection.remote.network, connection.remote.hostname, connection.remote.port, connection.remote.username);
+        setTimeout(function(){
+          exec('open '+connection.local.protocol+'://'+connection.local.hostname+':'+connection.local.port);
+        }, 5000);
+      }
     });  
 }
 
 // edit/new
-function promptConnection(id){
+function promptConnectionSelect(id){
+  var choices = [];
+  var choiceDefault = 1;
+
+  // add 'new'
+  choices.push(actions['new'].green);
+
+  // add existing connection identifiers
+  choices = choices.concat(_.chain(config).keys().filter(function(entry){
+    return entry!='lastUsedConnection';
+  }).value());
+
+  // determine default aka lastUsedConnection
+  if(typeof(config.lastUsedConnection)!='undefined'){
+    choices.forEach(function(choice, index){
+      if(choice==config.lastUsedConnection){
+        choiceDefault = index;
+      }
+    });
+  }
+
+  // list current connections
+  inquirer.prompt([
+    {
+      type      : "list",
+      name      : "connection",
+      message   : "Select connection".yellow,
+      paginated : true,
+      choices   : choices,
+      default   : choiceDefault
+    }], function( answers ) {
+
+    promptActionSelect(answers);
+  }); 
+}
+
+// edit/new
+function promptActionSelect(selection){
+  
+  if(selection.connection==actions['new'].green){
+    promptConnection();
+    return true;
+  } 
+
+  var choices = [];
+
+  // add existing connection identifiers
+  choices = choices.concat(_.chain(actions).values().filter(function(action){return action!=actions['new'];}).value());
+
+  // debug » test `expand`
+  if(false){
+    var choices2 = _.chain(choices).map(function(choice, name){
+      return {'key': choice[0], name: choice.toLowerCase(), value: choice};
+    }); 
+    console.log("2:", choices2);
+  }
+
+  // list current connections
+  inquirer.prompt([
+    {
+      type      : "list",
+      name      : "action",
+      message   : "Select action".yellow,
+      paginated : true,
+      choices   : choices
+    }], function( answers ) {
+
+    switch(answers.action){
+      case actions['delete']:
+        promptDelete(selection.connection);
+        break;
+      case actions['update']:
+        promptConnection(selection.connection);
+        break;
+      case actions['copy']:
+        promptConnection(selection.connection, true);
+        break;
+      case actions['connect']:
+        promptConnect(selection.connection);
+        break;
+    }
+
+    tunnel.emit(answers.action+'_selected');
+  }); 
+}
+
+// edit/new
+function promptConnection(id, copy){
   
   var connection = (typeof(id)=='undefined' || typeof(config[id])!='object') ? defaultConnection() : config[id];
 
@@ -160,6 +237,12 @@ function promptConnection(id){
       message: "Enter local port",
       name: "local.port",
       default: connection.local.port
+    },
+    {
+      type: "input",
+      message: "Enter local protocol",
+      name: "local.protocol",
+      default: connection.local.protocol
     },
     {
       type: "input",
@@ -187,7 +270,6 @@ function promptConnection(id){
     }
 
   ], function( answers ) {
-    console.log(answers);    
     
     var name = answers['name'];
     delete answers['name'];
@@ -201,13 +283,11 @@ function promptConnection(id){
       data[segments[0]][segments[1]] = answer;
     });
 
-    console.log("data", data);
-
     // attach
     config[name]=data;
 
     // if connection got renamed, delete the old entry
-    if(name!=id) delete config[id];      
+    if(name!=id && copy!==true) delete config[id];      
 
     // prompt user
     promptStore(name);
@@ -216,3 +296,5 @@ function promptConnection(id){
     tunnel.emit('event');
   });
 }
+
+promptConnectionSelect();

@@ -125,6 +125,7 @@ Tunnel.prototype.localPort = '';
 Tunnel.prototype.connect = function(localHostname, localPort, remoteNetwork, remoteHostname, remotePort, remoteUser){
   
   var sshConnect = 'ssh -N -L '+localPort+':'+remoteHostname+':'+remotePort+' '+remoteUser+'@'+remoteNetwork;  
+  console.log(sshConnect);
   this.emit('connect');
   exec(sshConnect, function(err, stdout, stderr){
     console.log(err);
@@ -145,8 +146,4 @@ Tunnel.prototype.connect = function(localHostname, localPort, remoteNetwork, rem
 
 Tunnel.prototype.disconnect = function(name){
   this.emit('disconnect');
-};
-
-Tunnel.prototype.status = function(zeroxxx, first, second, third, fourth, fifth){
-  this.emit('status', zeroxxx, first, second, third, fourth, fifth);
 };
