@@ -35,8 +35,9 @@ Version: 2.1.0
 
   Options:
 
-    -h, --help     output usage information
-    -V, --version  output the version number
+    -h, --help         Output usage information
+    -V, --version      Output the version number
+    -f, --file <file>  Load configuration from <file> (default: 'tunnel.conf')
 
 ```
 
