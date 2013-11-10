@@ -2,7 +2,7 @@
 
 export NODE_ENV=test
 
-echo "Tunnel Testsuite"
+node -e 'var tunnel = require("./index.js").tunnel(""); console.log("SSH-Tunnel Testsuite\n".white.bold+tunnel.version.white);'
 
 echo
 for file in $@; do

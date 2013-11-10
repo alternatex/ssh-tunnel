@@ -2,8 +2,6 @@
 
 "use strict";
 
-var version = '2.0.0';
-
 // module dependencies
 var _ = require("underscore");
 var colors = require("colors");
@@ -16,7 +14,7 @@ var tunnel = require("../").tunnel('');
 
 // say hi
 console.log('SSH-Tunnel'.white.bold); 
-console.log(('Version: '+version).white); 
+console.log(('Version: '+tunnel.version).white); 
 console.log();
 
 // bootstrap
@@ -212,9 +210,9 @@ function promptActionSelect(selection){
   }); 
 }
 
-// edit/new
 function promptConnection(id, copy){
   
+  // new/update
   var connection = (typeof(id)=='undefined' || typeof(config[id])!='object') ? defaultConnection() : config[id];
 
   inquirer.prompt([
@@ -269,10 +267,14 @@ function promptConnection(id, copy){
 
   ], function( answers ) {
     
+    // pre
     var name = answers['name'];
     delete answers['name'];
 
+    // connection
     var data = {};
+
+    // process
     _(answers).each(function(answer, index){
       var segments = index.split('.');
       if(typeof(data[segments[0]])=='undefined'){
@@ -284,14 +286,11 @@ function promptConnection(id, copy){
     // attach
     config[name]=data;
 
-    // if connection got renamed, delete the old entry
+    // rename
     if(name!=id && copy!==true) delete config[id];      
 
-    // prompt user
+    // store
     promptStore(name);
-
-    // emit event?
-    tunnel.emit('event');
   });
 }
 

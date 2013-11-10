@@ -6,12 +6,18 @@ var path = require('path');
 var dirname = path.dirname;
 var basename = path.basename;
 
+var colors = require('colors');
+
 var child_process = require('child_process');
 var spawn = child_process.spawn;
 var exec = child_process.exec;
 
 var fs = require('fs');
 var exists = fs.existsSync;
+
+// package.json
+var npmPackage = JSON.parse(fs.readFileSync(__dirname+'/package.json', 'utf8'));
+var version = npmPackage.version;
 
 /**
  * Expose the root command.
@@ -58,6 +64,7 @@ Tunnel.prototype.__proto__ = require('events').EventEmitter.prototype;
 Tunnel.prototype.tunnel = function(name, desc){
   var args = name.split(/ +/);
   var tunnel = new Tunnel(args.shift());
+  tunnel.version = version;
 
   tunnel.on('connect', function(){});    
   tunnel.on('disconnect', function(){});    
