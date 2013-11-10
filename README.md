@@ -5,11 +5,6 @@ SSH-Tunnel
 
 SSH-Tunnel management utility
 
-Prerequisites
--------------
-
-Unix OS
-
 Installation
 -------------
 
@@ -24,17 +19,6 @@ Usage
 ```bash
 ssh-tunnel
 ```
-
-Changelog
--------------
-**1.1.0:**<br/>
-* settings persisted by `bazinga` inclusion for configuration management
-
-**1.2.0:**<br/>
-* installation through `shinst` 
-
-**2.0.0:**<br/>
-* switched from bash to nodejs
 
 License
 -------------
