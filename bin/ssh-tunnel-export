@@ -5,6 +5,7 @@ var dirname = path.dirname;
 var basename = path.basename;
 
 var program = require('commander');
+program.option('-f, --file <file>', 'Load configuration from <file> (default: \'tunnel.conf\')');
 program.parse(process.argv);
 
 if( false && program.args.length!==1){
@@ -14,7 +15,18 @@ if( false && program.args.length!==1){
 
 var connectionId = program.args[0];
 
-var cli = require("../lib/cli");
-
-cli.load();
+var cli = getCLI(program); 
 cli.prompt.export();
+
+// TODO: inject to client-commands...!!! » custom cfg-file support ...
+// TODO: inject to client-commands...!!! » custom cfg-file support ...
+// TODO: inject to client-commands...!!! » custom cfg-file support ...
+// TODO: inject to client-commands...!!! » custom cfg-file support ...
+// TODO: inject to client-commands...!!! » custom cfg-file support ...
+
+function getCLI(program){
+  var cli = require("../lib/cli");
+  var filename = program.file ? program.file : 'tunnel.conf';
+  cli.load(filename);
+  return cli;
+}

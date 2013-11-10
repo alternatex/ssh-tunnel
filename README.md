@@ -20,7 +20,7 @@ Usage
 
 ```bash
 SSH-Tunnel
-Version: 2.1.0
+Version: 2.1.1
 
   Usage: ssh-tunnel [options] [command]
 
@@ -30,7 +30,7 @@ Version: 2.1.0
     copy <name>            Copy existing connection
     delete <name>          Delete connection
     update <name>          Update connection
-    export                 Export connections to file
+    export <file>          Export connections to file
     help [cmd]             Display help for [cmd]
 
   Options:
@@ -38,7 +38,6 @@ Version: 2.1.0
     -h, --help         Output usage information
     -V, --version      Output the version number
     -f, --file <file>  Load configuration from <file> (default: 'tunnel.conf')
-
 ```
 
 License
