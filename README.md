@@ -16,8 +16,28 @@ You can install this through [npm](https://npmjs.org):
 Usage
 -------------
 
+`ssh-tunnel help`
+
 ```bash
-ssh-tunnel
+SSH-Tunnel
+Version: 2.1.0
+
+  Usage: ssh-tunnel [options] [command]
+
+  Commands:
+
+    connect <name>         Establish SSH connection
+    copy <name>            Copy existing connection
+    delete <name>          Delete connection
+    update <name>          Update connection
+    export                 Export connections to file
+    help [cmd]             Display help for [cmd]
+
+  Options:
+
+    -h, --help     output usage information
+    -V, --version  output the version number
+
 ```
 
 License

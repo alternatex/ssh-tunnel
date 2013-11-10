@@ -19,6 +19,8 @@ var exists = fs.existsSync;
 var npmPackage = JSON.parse(fs.readFileSync(__dirname+'/package.json', 'utf8'));
 var version = npmPackage.version;
 
+// TODO: turn lib/cli.js into lib/tunnel.js err lib/index.js -> no-index; package.json/main:lib/index.js
+
 /**
  * Expose the root command.
  */
@@ -80,10 +82,26 @@ Tunnel.prototype.tunnel = function(name, desc){
  */      
 Tunnel.prototype.connect = function(localHostname, localPort, remoteNetwork, remoteHostname, remotePort, remoteUser){
   
-  var sshConnect = 'ssh -N -L '+localPort+':'+remoteHostname+':'+remotePort+' '+remoteUser+'@'+remoteNetwork;  
-  console.log(sshConnect);
+  var cmd = 'ssh -N -L '+localPort+':'+remoteHostname+':'+remotePort+' '+remoteUser+'@'+remoteNetwork;  
+  console.log(cmd);
   this.emit('connect');
-  exec(sshConnect, function(err, stdout, stderr){
+  exec(cmd, function(err, stdout, stderr){
+    console.log(err);
+    console.log(stdout);
+  });
+};
+
+/**
+ * Install ssh key on remote machine (passwordless auth)
+ *
+ * @api public
+ */      
+Tunnel.prototype.install = function(remoteNetwork, remoteUser){
+  
+  var cmd = 'ssh-copy-id '+remoteUser+'@'+remoteNetwork;  
+  console.log(cmd);
+  this.emit('connect');
+  exec(cmd, function(err, stdout, stderr){
     console.log(err);
     console.log(stdout);
   });
