@@ -13,14 +13,14 @@ You can install this through [npm](https://npmjs.org):
 `npm install ssh-tunnel`
 
 
-Usage
+Documentation
 -------------
 
 `ssh-tunnel help`
 
-```bash
+```
 SSH-Tunnel
-Version: 2.1.1
+Version: 2.2.1
 
   Usage: ssh-tunnel [options] [command]
 
@@ -31,12 +31,13 @@ Version: 2.1.1
     delete <name>          Delete connection
     update <name>          Update connection
     export <file>          Export connections to file
-    help [cmd]             Display help for [cmd]
+    install                Install SSH key for passwordless auth
+    help [cmd]             display help for [cmd]
 
   Options:
 
-    -h, --help         Output usage information
-    -V, --version      Output the version number
+    -h, --help         output usage information
+    -V, --version      output the version number
     -f, --file <file>  Load configuration from <file> (default: 'tunnel.conf')
 ```
 
