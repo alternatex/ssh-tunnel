@@ -7,7 +7,7 @@
  */
 var colors = require("colors");
 var program = require('commander');
-var tunnel = require("../").tunnel('');
+var tunnel = require("../lib").tunnel('');
 
 console.log('SSH-Tunnel'.white.bold); 
 console.log(('Version: '+tunnel.version).white); 
@@ -22,7 +22,7 @@ program
   .command('update <name>', 'Update connection')
   .command('export <file>', 'Export connections to file')
   //.command('import <file>', 'Import connections from file')  
-  //.command('install', 'Install SSH key for passwordless auth')
+  .command('install', 'Install SSH key for passwordless auth')
   .parse(process.argv);
 
 // TODO: custom help/docs » args.length==0 triggers interactive mode, etc.

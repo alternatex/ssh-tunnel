@@ -14,9 +14,15 @@ if(program.args.length!==1){
 
 var connectionId = program.args[0];
 
-var cli = require("../lib/cli");
+var cli = getCLI(program);
 
-cli.load();
 cli.connect(connectionId);
 
 console.log("connection is", connectionId);
+
+function getCLI(program){
+  var cli = require("../lib/cli");
+  var filename = program.file ? program.file : 'tunnel.conf';
+  cli.load(filename);
+  return cli;
+}
