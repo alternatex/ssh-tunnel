@@ -22,7 +22,7 @@ console.log("connection is", connectionId);
 
 function getCLI(program){
   var cli = require("../lib/cli");
-  var filename = program.file ? program.file : 'tunnel.conf';
+  var filename = program.file ? program.file : 'tunnel.json';
   cli.load(filename);
   return cli;
 }

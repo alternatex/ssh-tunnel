@@ -5,7 +5,7 @@ var dirname = path.dirname;
 var basename = path.basename;
 
 var program = require('commander');
-program.option('-f, --file <file>', 'Load configuration from <file> (default: \'tunnel.conf\')');
+program.option('-f, --file <file>', 'Load configuration from <file> (default: \'tunnel.json\')');
 program.parse(process.argv);
 
 if( false && program.args.length!==1){
@@ -26,7 +26,7 @@ cli.prompt.export();
 
 function getCLI(program){
   var cli = require("../lib/cli");
-  var filename = program.file ? program.file : 'tunnel.conf';
+  var filename = program.file ? program.file : 'tunnel.json';
   cli.load(filename);
   return cli;
 }

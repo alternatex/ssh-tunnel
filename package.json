@@ -1,7 +1,7 @@
 {
   "name": "ssh-tunnel",
   "description": "SSH-Tunnel management utility",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "keywords": [
     "command",
     "cli",
@@ -47,5 +47,5 @@
   },
   "readme": "",
   "readmeFilename": "README.md",
-  "_id": "ssh-tunnel@2.2.3"
+  "_id": "ssh-tunnel@2.2.4"
 }

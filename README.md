@@ -39,7 +39,7 @@ Version: 2.2.3
 
     -h, --help         output usage information
     -V, --version      output the version number
-    -f, --file <file>  Load configuration from <file> (default: 'tunnel.conf')
+    -f, --file <file>  Load configuration from <file> (default: 'tunnel.json')
 ```
 
 License
