@@ -20,17 +20,18 @@ Documentation
 
 ```
 SSH-Tunnel
-Version: 2.2.1
+Version: 2.2.3
 
   Usage: ssh-tunnel [options] [command]
 
   Commands:
 
-    connect <name>         Establish SSH connection
-    copy <name>            Copy existing connection
+    connect <name>         Establish connection
+    copy <name> <copy>     Copy existing connection
     delete <name>          Delete connection
     update <name>          Update connection
     export <file>          Export connections to file
+    import <file>          Import connections from file
     install                Install SSH key for passwordless auth
     help [cmd]             display help for [cmd]
 
