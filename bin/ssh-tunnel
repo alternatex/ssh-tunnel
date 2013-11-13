@@ -16,12 +16,12 @@ console.log(('Version: '+tunnel.version).white);
 program
   .version(tunnel.version)
   .option('-f, --file <file>', 'Load configuration from <file> (default: \'tunnel.conf\')')
-  .command('connect <name>', 'Establish SSH connection')
-  .command('copy <name>', 'Copy existing connection')
+  .command('connect <name>', 'Establish connection')
+  .command('copy <name> <copy>', 'Copy existing connection')
   .command('delete <name>', 'Delete connection')
   .command('update <name>', 'Update connection')
   .command('export <file>', 'Export connections to file')
-  //.command('import <file>', 'Import connections from file')  
+  .command('import <file>', 'Import connections from file')  
   .command('install', 'Install SSH key for passwordless auth')
   .parse(process.argv);
 
