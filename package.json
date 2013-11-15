@@ -24,7 +24,9 @@
     "commander": "~2.0",
     "prompt": "~0.2",    
     "underscore": "~1.5",
-    "require-dir": "~0.1"        
+    "require-dir": "~0.1",        
+    "requirejs": "~2.1.9",        
+    "amdefine": "~0.1.0"        
   },  
   "devDependencies": {
     "should": ">= 0.0.1"
