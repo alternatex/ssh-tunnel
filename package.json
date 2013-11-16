@@ -1,7 +1,7 @@
 {
   "name": "ssh-tunnel",
   "description": "SSH-Tunnel management utility",
-  "version": "2.3.10",
+  "version": "2.3.11",
   "keywords": [
     "command",
     "cli",
@@ -30,14 +30,7 @@
     "should": ">= 0.0.1"
   },
   "bin" : { 
-    "ssh-tunnel" : "bin/ssh-tunnel", 
-    "ssh-tunnel-connect" : "bin/ssh-tunnel-connect", 
-    "ssh-tunnel-copy" : "bin/ssh-tunnel-copy", 
-    "ssh-tunnel-delete" : "bin/ssh-tunnel-delete", 
-    "ssh-tunnel-export" : "bin/ssh-tunnel-export", 
-    "ssh-tunnel-import" : "bin/ssh-tunnel-import", 
-    "ssh-tunnel-update" : "bin/ssh-tunnel-update", 
-    "ssh-tunnel-install" : "bin/ssh-tunnel-install" 
+    "ssh-tunnel" : "bin/ssh-tunnel"
   },
   "scripts": {
     "test": "make test"
@@ -45,7 +38,5 @@
   "engines": {
     "node": ">= 0.6.x"
   },
-  "readme": "",
-  "readmeFilename": "README.md",
-  "_id": "ssh-tunnel@2.3.10"
+  "readmeFilename": "README.md"
 }
