@@ -9,6 +9,17 @@ var colors = require("colors");
 var program = require('commander');
 var tunnel = require("../lib").tunnel('');
 
+/*
+var child_process = require('child_process');
+var spawn = child_process.spawn;
+var exec = child_process.exec;
+
+var _ = require("underscore"); 
+var fs = require("fs");
+var colors = require("colors");
+var inquirer = require("inquirer");
+*/
+
 console.log('SSH-Tunnel'.white.bold); 
 console.log(('Version: '+tunnel.version).white); 
 
@@ -33,8 +44,9 @@ if(program.args.length===0){
   console.log("Starting interactive mode".green);  
   console.log();
   
-  var cli = getCLI(program); 
-  cli.prompt.connection();  
+  var app = getApp(program); 
+  app.modules.connections();
+  console.log(app); //.modules.connection();  
 }
 
 // TODO: inject to client-commands...!!! » custom cfg-file support ...
@@ -43,9 +55,9 @@ if(program.args.length===0){
 // TODO: inject to client-commands...!!! » custom cfg-file support ...
 // TODO: inject to client-commands...!!! » custom cfg-file support ...
 
-function getCLI(program){
-  var cli = require("../lib/cli");
+function getApp(program){
+  var app = require("../lib/app");
   var filename = program.file ? program.file : 'tunnel.json';
-  cli.load(filename);
-  return cli;
+  app.init(filename);
+  return app;
 }
