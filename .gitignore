@@ -1,2 +1,4 @@
 .DS_Store
 .tunnelxc
+tunnel.*
+node_modules
