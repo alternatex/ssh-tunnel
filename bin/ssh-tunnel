@@ -7,25 +7,19 @@
  */
 var colors = require("colors");
 var program = require('commander');
-var tunnel = require("../lib").tunnel('');
-
-/*
-var child_process = require('child_process');
-var spawn = child_process.spawn;
-var exec = child_process.exec;
-
-var _ = require("underscore"); 
-var fs = require("fs");
-var colors = require("colors");
-var inquirer = require("inquirer");
-*/
+var version = JSON.parse(require('fs').readFileSync(__dirname+'/../package.json', 'utf8')).version;
 
 console.log('SSH-Tunnel'.white.bold); 
-console.log(('Version: '+tunnel.version).white); 
+console.log(('Version: '+version).white); 
 
 // TODO: gather program.command info from lib/prompt/* -> require-dir
+// TODO: gather program.command info from lib/prompt/* -> require-dir
+// TODO: gather program.command info from lib/prompt/* -> require-dir
+// TODO: gather program.command info from lib/prompt/* -> require-dir
+// TODO: gather program.command info from lib/prompt/* -> require-dir
+
 program
-  .version(tunnel.version)
+  .version(version)
   .option('-f, --file <file>', 'Load configuration from <file> (default: \'tunnel.json\')')
   .command('connect <name>', 'Establish connection')
   .command('copy <name> <copy>', 'Copy existing connection')
@@ -33,11 +27,8 @@ program
   .command('update <name>', 'Update connection')
   .command('export <file>', 'Export connections to file')
   .command('import <file>', 'Import connections from file')  
-  .command('install', 'Install SSH key for passwordless auth')
+  .command('install', 'Install your public key in a remote machine\'s authorized_keys')
   .parse(process.argv);
-
-// TODO: custom help/docs » args.length==0 triggers interactive mode, etc.
-//  .command('help [cmd]', 'Display help for [cmd]')
 
 if(program.args.length===0){
   console.log();
@@ -45,15 +36,22 @@ if(program.args.length===0){
   console.log();
   
   var app = getApp(program); 
-  app.modules.connections();
-  console.log(app); //.modules.connection();  
-}
+  app.tunnel.on('connect', function(){
 
-// TODO: inject to client-commands...!!! » custom cfg-file support ...
-// TODO: inject to client-commands...!!! » custom cfg-file support ...
-// TODO: inject to client-commands...!!! » custom cfg-file support ...
-// TODO: inject to client-commands...!!! » custom cfg-file support ...
-// TODO: inject to client-commands...!!! » custom cfg-file support ...
+    // TODO: display connection infos
+    console.log();
+    console.log("Establishing connection".green);
+    console.log("Press "+"^C".yellow + " to disconnect");
+    console.log();
+  });
+
+  app.tunnel.on('install', function(){
+    console.log();
+    console.log("Importing local certificate into remote".green);
+    console.log();
+  });  
+  app.require('connections')();
+}
 
 function getApp(program){
   var app = require("../lib/app");
