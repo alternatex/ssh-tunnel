@@ -7,13 +7,6 @@ var basename = path.basename;
 var program = require('commander');
 program.parse(process.argv);
 
-if(program.args.length!==1){
-  var colors = require('colors');
-  throw new Error((basename(__filename)+' accepts exactly one parameter: ').red+'<name>'.white.bold);
-}
-
-var connectionId = program.args[0];
-
 var app = getApp(program);
 
 app.tunnel.on('connect', function(){
