@@ -14,9 +14,26 @@ if(program.args.length!==1){
 
 var connectionId = program.args[0];
 
-var cli = require("../lib/cli");
+var app = getApp(program);
 
-cli.load();
-cli.prompt.update(connectionId, true);
+app.tunnel.on('connect', function(){
+  console.log();
+  console.log("Establishing connection".green);
+  console.log("Press "+"^C".yellow + " to disconnect");
+  console.log();
+});
 
-console.log("connection is", connectionId);
+app.tunnel.on('install', function(){
+  console.log();
+  console.log("Importing local certificate into remote".green);
+  console.log();
+});
+
+function getApp(program){
+  var app = require("../lib/app");
+  var filename = program.file ? program.file : 'tunnel.json';
+  app.init(filename);
+  return app;
+}
+
+app.require('update')(connectionId, true);

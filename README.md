@@ -20,7 +20,7 @@ Documentation
 
 ```
 SSH-Tunnel
-Version: 2.2.4
+Version: 2.3.0
 
   Usage: ssh-tunnel [options] [command]
 
@@ -32,7 +32,7 @@ Version: 2.2.4
     update <name>          Update connection
     export <file>          Export connections to file
     import <file>          Import connections from file
-    install                Install SSH key for passwordless auth
+    install                Install your public key in a remote machine's authorized_keys
     help [cmd]             display help for [cmd]
 
   Options:
