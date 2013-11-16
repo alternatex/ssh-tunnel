@@ -23,7 +23,7 @@ program
   .command('update <name>', 'Update connection')
   .command('export <file>', 'Export connections to file')
   //.command('import <file>', 'Import connections from file')  
-  .command('install', 'Install your public key in a remote machine\'s authorized_keys')
+  .command('install', 'Install your public key in a remote machine authorized_keys')
   .parse(process.argv);
 
 if(program.args.length===0){
