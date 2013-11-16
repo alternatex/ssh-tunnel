@@ -20,19 +20,18 @@ Documentation
 
 ```
 SSH-Tunnel
-Version: 2.3.2
+Version: 2.3.8
 
   Usage: ssh-tunnel [options] [command]
 
   Commands:
 
     connect <name>         Establish connection
-    copy <name> <copy>     Copy existing connection
+    copy <name>            Copy existing connection
     delete <name>          Delete connection
     update <name>          Update connection
     export <file>          Export connections to file
-    import <file>          Import connections from file
-    install                Install your public key in a remote machine authorized_keys
+    install                Install your public key in a remote machine's authorized_keys
     help [cmd]             display help for [cmd]
 
   Options:
@@ -41,6 +40,24 @@ Version: 2.3.2
     -V, --version      output the version number
     -f, --file <file>  Load configuration from <file> (default: 'tunnel.json')
 ```
+
+Interactive Mode
+----------------
+
+### Connections
+![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/connection-list.png)
+
+###  Actions
+![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/connection-detail-actions.png)
+
+#### Update
+![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/connection-detail-actions-update.png)
+
+### Commands
+
+#### Export
+![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/command-export-connection.png)
+![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/command-export-filename.png)
 
 License
 -------------

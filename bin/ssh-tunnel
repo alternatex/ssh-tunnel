@@ -13,20 +13,16 @@ console.log('SSH-Tunnel'.white.bold);
 console.log(('Version: '+version).white); 
 
 // TODO: gather program.command info from lib/prompt/* -> require-dir
-// TODO: gather program.command info from lib/prompt/* -> require-dir
-// TODO: gather program.command info from lib/prompt/* -> require-dir
-// TODO: gather program.command info from lib/prompt/* -> require-dir
-// TODO: gather program.command info from lib/prompt/* -> require-dir
 
 program
   .version(version)
   .option('-f, --file <file>', 'Load configuration from <file> (default: \'tunnel.json\')')
   .command('connect <name>', 'Establish connection')
-  .command('copy <name> <copy>', 'Copy existing connection')
+  .command('copy <name>', 'Copy existing connection')
   .command('delete <name>', 'Delete connection')
   .command('update <name>', 'Update connection')
   .command('export <file>', 'Export connections to file')
-  .command('import <file>', 'Import connections from file')  
+  //.command('import <file>', 'Import connections from file')  
   .command('install', 'Install your public key in a remote machine\'s authorized_keys')
   .parse(process.argv);
 
