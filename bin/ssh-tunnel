@@ -12,6 +12,8 @@ var version = JSON.parse(require('fs').readFileSync(__dirname+'/../package.json'
 console.log('SSH-Tunnel'.white.bold); 
 console.log(('Version: '+version).white); 
 
+// TODO: fix input file!!! -> ensure written to on output aswell... thanks!
+
 // TODO: gather program.command info from lib/prompt/* -> require-dir
 // TODO: gather program.command info from lib/prompt/* -> require-dir
 // TODO: gather program.command info from lib/prompt/* -> require-dir
@@ -35,10 +37,9 @@ if(program.args.length===0){
   console.log("Starting interactive mode".green);  
   console.log();
   
-  var app = getApp(program); 
-  app.tunnel.on('connect', function(){
+  var app = getApp(program);
 
-    // TODO: display connection infos
+  app.tunnel.on('connect', function(){
     console.log();
     console.log("Establishing connection".green);
     console.log("Press "+"^C".yellow + " to disconnect");
@@ -49,13 +50,14 @@ if(program.args.length===0){
     console.log();
     console.log("Importing local certificate into remote".green);
     console.log();
-  });  
+  });
+
   app.require('connections')();
 }
 
 function getApp(program){
   var app = require("../lib/app");
   var filename = program.file ? program.file : 'tunnel.json';
-  app.init(filename);
+  app.init({ filename: filename });
   return app;
 }
