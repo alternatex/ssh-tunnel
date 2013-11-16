@@ -12,28 +12,8 @@ if(program.args.length!==1){
   throw new Error((basename(__filename)+' accepts exactly one parameter: ').red+'<name>'.white.bold);
 }
 
-var connectionId = program.args[0];
+var filename = program.file ? program.file : 'tunnel.json';
 
-var app = getApp(program);
-
-app.tunnel.on('connect', function(){
-  console.log();
-  console.log("Establishing connection".green);
-  console.log("Press "+"^C".yellow + " to disconnect");
-  console.log();
-});
-
-app.tunnel.on('install', function(){
-  console.log();
-  console.log("Importing local certificate into remote".green);
-  console.log();
-});
-
-function getApp(program){
-  var app = require("../lib/app");
-  var filename = program.file ? program.file : 'tunnel.json';
-  app.init(filename);
-  return app;
-}
-
-app.require('update')(connectionId, true);
+var app = require("../lib/app");
+app.init({ filename: filename });
+app.require('update')(program.args[0], true);

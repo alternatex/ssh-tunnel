@@ -14,7 +14,6 @@ if(program.args.length!==1){
 
 var filename = program.args[0];
 
-var cli = require("../lib/cli");
-
-cli.load();
-cli.prompt.import(filename);
+var app = require("../lib/app");
+var filename = program.file ? program.file : 'tunnel.json';
+app.init({ filename: filename });
