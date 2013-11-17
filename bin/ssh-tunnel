@@ -5,7 +5,6 @@
 /**
  * Module dependencies
  */
-
 var app = require("../lib/app");
 var version = JSON.parse(require('fs').readFileSync(__dirname+'/../package.json', 'utf8')).version;
 
@@ -15,6 +14,15 @@ var basename = path.basename;
 
 var colors = require("colors");
 var program = require('commander');
+
+// TODO:
+// -----
+// - gather program.command info from lib/prompt/* -> require-dir
+// - check configuration file loaded for updates so we don't overwrite stuff used from ml processes without sayin' a word
+// - look for global hook pre-command execution, but post option parsing
+// - packs -> multi-port local / multi-everything remote
+// - packs.status()
+// - packs.*
 
 // attach setup helper
 app.setup = function setup(){
@@ -34,7 +42,7 @@ program
   .description('Establish connection')
   .option('-f, --file <file>', 'Load configuration from <file> (default: \'tunnel.json\')')
   .action(function(env, options){
-    app.setup().require('connect')(program.args[1]);
+    app.setup().require('connect')(program.args[0]);
   });
 
 program
@@ -42,7 +50,7 @@ program
   .description('Copy existing connection')
   .option('-f, --file <file>', 'Load configuration from <file> (default: \'tunnel.json\')')
   .action(function(env, options){
-    app.setup().require('copy')(program.args[1]);
+    app.setup().require('copy')(program.args[0]);
   });
 
 program
@@ -50,7 +58,7 @@ program
   .description('Delete connection')
   .option('-f, --file <file>', 'Load configuration from <file> (default: \'tunnel.json\')')
   .action(function(env, options){
-    app.setup().require('delete')(program.args[1]);
+    app.setup().require('delete')(program.args[0]);
   });
 
 program
@@ -58,7 +66,7 @@ program
   .description('Update connection')
   .option('-f, --file <file>', 'Load configuration from <file> (default: \'tunnel.json\')')
   .action(function(env, options){
-    app.setup().require('delete')(program.args[1]);
+    app.setup().require('delete')(program.args[0]);
   });
 
 program
@@ -66,6 +74,7 @@ program
   .description('Export connections to file')
   .option('-f, --file <file>', 'Load configuration from <file> (default: \'tunnel.json\')')
   .action(function(env, options){
+    console.log();
     app.setup().require('export')();
   });
 
@@ -74,7 +83,7 @@ program
   .description('Install your public key in a remote machine authorized_keys')
   .option('-f, --file <file>', 'Load configuration from <file> (default: \'tunnel.json\')')
   .action(function(env, options){
-    app.setup().require('install')(program.args[1]);
+    app.setup().require('install')(program.args[0]);
   });
 
 // process
@@ -85,10 +94,5 @@ if(program.args.length===0){
   console.log();
   console.log("Starting interactive mode".green);  
   console.log();
-  app.setup().require('connections')();
+  app.setup().require('list')();
 }
-
-// TODO
-// - gather program.command info from lib/prompt/* -> require-dir
-// - check configuration file loaded for updates so we don't overwrite stuff used from ml processes without sayin' a word
-// - look for global hook pre-command execution, but post option parsing

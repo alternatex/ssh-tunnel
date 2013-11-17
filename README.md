@@ -20,7 +20,7 @@ Documentation
 
 ```
 SSH-Tunnel
-Version: 2.3.12
+Version: 2.3.13
 
   Usage: ssh-tunnel [options] [command]
 
