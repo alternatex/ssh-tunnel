@@ -15,6 +15,8 @@ var basename = path.basename;
 var colors = require("colors");
 var program = require('commander');
 
+var debug = false;
+
 // TODO:
 // -----
 // - gather program.command info from lib/prompt/* -> require-dir
@@ -35,9 +37,11 @@ app.setup = function setup(){
 console.log('SSH-Tunnel'.white.bold); 
 console.log(('Version: '+version).white); 
 
+// configuration
+program.version(version);
+
 // setup commands
-program
-  .version(version)
+program  
   .option('-f, --file <file>', 'Load configuration from <file> (default: \'tunnel.json\')')
   .command('connect <name>')
   .description('Establish connection')
@@ -63,7 +67,7 @@ program
   .command('update <name>')
   .description('Update connection')
   .action(function(env, options){
-    app.setup().require('delete')(program.args[0]);
+    app.setup().require('update')(program.args[0]);
   });
 
 program
@@ -93,8 +97,10 @@ program.parse(process.argv);
 
 // post process
 if(program.args.length===0){
-  console.log();
-  console.log("Starting interactive mode".green);  
-  console.log();
+  if(debug){
+    console.log();
+    console.log("Starting interactive mode".green);  
+  }
+  console.log();  
   app.setup().require('list')();
 }
