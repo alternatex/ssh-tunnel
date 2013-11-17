@@ -1,7 +1,7 @@
 {
   "name": "ssh-tunnel",
   "description": "SSH-Tunnel management utility",
-  "version": "2.3.16",
+  "version": "2.3.17",
   "keywords": [
     "command",
     "cli",
@@ -14,7 +14,7 @@
     "email": "gianni.furger@gmail.com",
     "url": "http://github.com/alternatex/"
   },
-  "preferGlobal": true,
+  "preferGlobal": "true",
   "repository": {
     "type": "git",
     "url": "https://github.com/alternatex/ssh-tunnel.git"
