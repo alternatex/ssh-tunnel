@@ -1,7 +1,7 @@
 {
   "name": "ssh-tunnel",
   "description": "SSH-Tunnel management utility",
-  "version": "2.3.17",
+  "version": "2.3.18",
   "keywords": [
     "command",
     "cli",
@@ -14,7 +14,6 @@
     "email": "gianni.furger@gmail.com",
     "url": "http://github.com/alternatex/"
   },
-  "preferGlobal": "true",
   "repository": {
     "type": "git",
     "url": "https://github.com/alternatex/ssh-tunnel.git"
@@ -25,13 +24,15 @@
     "commander": "~2.0",
     "prompt": "~0.2",
     "underscore": "~1.5",
-    "require-dir": "~0.1",
-    "proxyquire": "~0.5.1",
-    "assert": "~0.4.9"
+    "require-dir": "~0.1"
   },
   "devDependencies": {
-    "should": ">= 0.0.1"
+    "should": ">= 0.0.1",
+    "proxyquire": "~0.5.1",
+    "assert": "~0.4.9"    
   },
+  "preferGlobal": true,
+  "main": "./lib/index.js",
   "bin": {
     "ssh-tunnel": "bin/ssh-tunnel"
   },
