@@ -16,11 +16,11 @@ You can install this through [npm](https://npmjs.org):
 Documentation
 -------------
 
-`ssh-tunnel help`
+`ssh-tunnel --help`
 
 ```
 SSH-Tunnel
-Version: 2.3.19
+Version: 2.3.20
 
   Usage: ssh-tunnel [options] [command]
 
@@ -30,9 +30,9 @@ Version: 2.3.19
     copy <name>            Copy existing connection
     delete <name>          Delete connection
     update <name>          Update connection
-    export <file>          Export connections to file
+    export                 Export connections to file
     install                Install your public key in a remote machine authorized_keys
-    help [cmd]             display help for [cmd]
+    selfupdate             Fetch latest release from npmjs.org
 
   Options:
 
@@ -55,12 +55,12 @@ Interactive Mode
 
 ### Commands
 
-#### Export
+#### Export 
 
-##### Select connections
+##### Make selection
 ![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/command-export-connection.png)
 
-##### Write to file
+##### Write to disk
 ![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/command-export-filename.png)
 
 License

@@ -3,7 +3,6 @@
  */
 
 var program = require('commander')
-  , prompt = require('prompt')
   , colors = require('colors')  
   , should = require('should')
   , assert = require('assert')
@@ -21,3 +20,6 @@ var tunnel = proxyquire(__dirname+'/../lib/index', { './app': appstub });
 
 // run tests
 assert.equal(tunnel.load({}), true);
+
+// TODO: stub responses -> expect event to be fired 
+// ...

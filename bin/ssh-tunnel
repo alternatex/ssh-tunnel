@@ -2,6 +2,8 @@
 
 "use strict";
 
+var debug = false;
+
 /**
  * Module dependencies
  */
@@ -12,13 +14,27 @@ var path = require('path');
 var dirname = path.dirname;
 var basename = path.basename;
 
-var colors = require("colors");
 var program = require('commander');
 
-var debug = false;
+var colors = require("colors");
+colors.setTheme({
+  input: 'grey',
+  verbose: ['cyan','bold'],
+  prompt: 'yellow',
+  info: 'green',
+  data: 'grey',
+  help: 'cyan',
+  warn: 'yellow',
+  debug: 'blue',
+  error: 'red',
+  title: ['white', 'bold'],
+  subtitle: ['white']
+});
 
 // TODO:
 // -----
+// - support identity file @ connect (ssh -i ...)
+// - phantom.js via html5 ssh-tunnel -> automate doc generation
 // - gather program.command info from lib/prompt/* -> require-dir
 // - check configuration file loaded for updates so we don't overwrite stuff used from ml processes without sayin' a word
 // - look for global hook pre-command execution, but post option parsing
@@ -34,8 +50,8 @@ app.setup = function setup(){
 }
 
 // say hi
-console.log('SSH-Tunnel'.white.bold); 
-console.log(('Version: '+version).white); 
+console.log('SSH-Tunnel'.title); 
+console.log(('Version: '+version).subtitle); 
 
 // configuration
 program.version(version);
@@ -87,7 +103,7 @@ program
 
 program
   .command('selfupdate')
-  .description('Update ssh-tunnel installation')
+  .description('Fetch latest release from npmjs.org')
   .action(function(env, options){
     app.setup().require('selfupdate')();
   });
@@ -99,7 +115,7 @@ program.parse(process.argv);
 if(program.args.length===0){
   if(debug){
     console.log();
-    console.log("Starting interactive mode".green);  
+    console.log("Starting interactive mode".info);  
   }
   console.log();  
   app.setup().require('list')();
