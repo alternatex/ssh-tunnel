@@ -2,7 +2,7 @@
 
 export NODE_ENV=test
 
-node -e 'var tunnel = require(__dirname+"/lib/index").tunnel(""); console.log("SSH-Tunnel Testsuite\n".white.bold+tunnel.version.white);'
+node -e 'var pkg = JSON.parse(require("fs").readFileSync(__dirname+"/package.json", "utf8")); require("colors"); console.log("SSH-Tunnel Testsuite\n".white.bold+pkg.version.white);'
 
 echo
 for file in $@; do
