@@ -20,7 +20,7 @@ Documentation
 
 ```
 SSH-Tunnel
-Version: 2.3.22
+Version: 2.3.23
 
   Usage: ssh-tunnel [options] [command]
 
@@ -40,28 +40,6 @@ Version: 2.3.22
     -V, --version      output the version number
     -f, --file <file>  Load configuration from <file> (default: 'tunnel.json')
 ```
-
-Interactive Mode
-----------------
-
-### Connections
-![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/connection-list.png)
-
-###  Actions
-![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/connection-detail-actions.png)
-
-#### Update
-![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/connection-detail-actions-update.png)
-
-### Commands
-
-#### Export 
-
-##### Make selection
-![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/command-export-connection.png)
-
-##### Write to disk
-![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/command-export-filename.png)
 
 License
 -------------

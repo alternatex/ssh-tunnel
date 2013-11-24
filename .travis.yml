@@ -1,4 +1,3 @@
-
 language: node_js
 
 node_js:
@@ -9,6 +8,7 @@ node_js:
 deploy:
   provider: npm
   email: gianni.furger@gmail.com
-  secure: QKlShFaFxE3OR7zsT9Jhc7fn8KNWpvlMnlzAROuWs55OlYKsLnelAa8qppp27YToUtqcXRI73PKQFDOpWDFFjP4VNGd+xnd1PPYF0lY6HzUHjVYi5T+xpzPNY88VLjYnud+phaFpRdLZ1lB1+hp2FswWouqFuP+oEhjVgq9ClKk=
+  password:
+    secure: QKlShFaFxE3OR7zsT9Jhc7fn8KNWpvlMnlzAROuWs55OlYKsLnelAa8qppp27YToUtqcXRI73PKQFDOpWDFFjP4VNGd+xnd1PPYF0lY6HzUHjVYi5T+xpzPNY88VLjYnud+phaFpRdLZ1lB1+hp2FswWouqFuP+oEhjVgq9ClKk=
   on:
     branch: master
