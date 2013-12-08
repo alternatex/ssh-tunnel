@@ -41,6 +41,28 @@ Version: 2.3.24
     -f, --file <file>  Load configuration from <file> (default: 'tunnel.json')
 ```
 
+Interactive Mode
+----------------
+
+### Connections
+![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/connection-list.png)
+
+###  Actions
+![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/connection-detail-actions.png)
+
+#### Update
+![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/connection-detail-actions-update.png)
+
+### Commands
+
+#### Export 
+
+##### Select
+![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/command-export-connection.png)
+
+##### Persist
+![SSH-Tunnel](https://github.com/alternatex/ssh-tunnel/raw/master/docs/assets/images/command-export-filename.png)
+
 License
 -------------
 Released under two licenses: new BSD, and MIT. You may pick the
